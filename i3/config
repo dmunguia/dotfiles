@@ -216,18 +216,31 @@ bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle
 # lock
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
 
+# update monitors
+bindsym $mod+m exec autorandr --change
+
 set $sysmenu "system:  [l]ogout  [s]uspend  [r]eboot  [p]oweroff"
 bindsym $mod+Shift+e      mode $sysmenu
 mode $sysmenu {
   bindsym l         exec i3-msg exit
   bindsym s         systemctl suspend -i
-  bindsym r         exec gnome-session-quit --reboot
-  bindsym p         exec gnome-session-quit --power-off
+  bindsym r         exec shutdown -r now
+  bindsym p         exec shutdown -h now
   bindsym Return    mode "default"
   bindsym Escape    mode "default"
 }
 
 exec compton
+exec dropbox start
+exec solaar
+exec run_keybase
+
+assign [class="Slack"] $workspace2
+assign [class="TelegramDesktop"] $workspace2
+assign [class="Spotify"] $workspace9
+
+exec slack
+exec /opt/Telegram/Telegram
 
 for_window [class="Keybase"] floating enable
 for_window [class="Keepassx"] floating enable
