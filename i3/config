@@ -213,8 +213,20 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle
 
+# Play/Pause, change songs
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
 # lock
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
+
+# screenshots
+bindsym XF86Display exec "scrot ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png"
 
 # update monitors
 bindsym $mod+m exec autorandr --change
@@ -246,6 +258,7 @@ for_window [class="Keybase"] floating enable
 for_window [class="Keepassx"] floating enable
 for_window [class="^Pavucontrol$"] floating enable
 for_window [title="Google Hangouts is sharing your screen with hangouts.google.com."] floating enable
+for_window [class="Gnome-calendar"] floating enable
 
 exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl
 exec_always --no-startup-id nm-applet
