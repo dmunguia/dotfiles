@@ -39,7 +39,8 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec rofi -font "Hack 12" -modi drun -show drun -lines 3 -eh 2 -width 25 -opacity 85 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "$ffffff"
+#bindsym $mod+d exec rofi -font "Hack 12" -modi drun -show drun -lines 3 -eh 2 -width 25 -opacity 85 -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "$ffffff"
+bindsym $mod+d exec synapse
 
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -98,13 +99,13 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 λ"
-set $workspace4 "4 "
-set $workspace5 "5"
-set $workspace6 "6"
-set $workspace7 "7"
-set $workspace8 "8"
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
 set $workspace9 "9 "
 set $workspace10 "0 "
 
@@ -219,8 +220,8 @@ bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # lock
 bindsym $mod+Shift+x exec i3lock --color "$bg-color"
@@ -246,6 +247,7 @@ exec compton
 exec dropbox start
 exec solaar
 exec run_keybase
+exec megasync
 
 assign [class="Slack"] $workspace2
 assign [class="TelegramDesktop"] $workspace2
@@ -266,4 +268,3 @@ exec_always --no-startup-id nm-applet
 exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
 
 exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
-
